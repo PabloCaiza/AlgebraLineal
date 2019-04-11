@@ -208,7 +208,9 @@ public class Gauss extends javax.swing.JFrame {
             bandera=true;
         }
         } 
-           
+              GraficaTest grafi = new GraficaTest(matriz,areglo);
+          grafi.setVisible(true);
+          
                 
             for (int i = 0; i < matriz.length; i++) {
                 for (int j = 0; j < matriz.length; j++) {
@@ -257,7 +259,10 @@ public class Gauss extends javax.swing.JFrame {
                         }
                     }
                 }
+              
                 areglo = aux.resolver(matriz, areglo, getIncognitas());
+
+                
                 for (int i = 0; i < areglo.length; i++) {
                     System.out.println(areglo[i]);
                     
@@ -273,7 +278,9 @@ public class Gauss extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Sistema Compatible Indeterminado  con  "+parametros+" parametros");
                 String[] arreglo = new String[getIncognitas()];
                 if(parametros<=3){
+                      
                 arreglo = Calculadora.resolver1(matriz, areglo, getIncognitas(),parametros);
+               
                 for (int i = 0; i < arreglo.length; i++) {
                     jTextArea.append("x" + (i + 1) + "=" + arreglo[i] + "\n");
                 }
@@ -286,6 +293,7 @@ public class Gauss extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
     }
         }else{
+            
            double areglo[] = new double[n];
              int areglo1[] = new int[2];
              double matriz[][] = new double[n][n];
@@ -308,7 +316,8 @@ public class Gauss extends javax.swing.JFrame {
             bandera=true;
         }
         }
-
+ GraficaTest grafi = new GraficaTest(matriz,areglo);
+          grafi.setVisible(true);
 //      Identificar si el sistema es compatible
     if(bandera==false){
         int rangoA = 0, rangoB;
@@ -322,7 +331,9 @@ public class Gauss extends javax.swing.JFrame {
         } else {
             if (n == rangoA) {
                 JOptionPane.showMessageDialog(null, "Sistem compatible determinado");
+                
                 areglo = aux.resolver(matriz, areglo, getIncognitas());
+                 
                 for (int i = 0; i < areglo.length; i++) {
                   
                     jTextArea.append("x" + (i + 1) + "=" + String.format("%.3f", areglo[i]) + "\n");
@@ -334,7 +345,9 @@ public class Gauss extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Sistema Compatible Indeterminado  con  "+parametros+" parametros");
                 String[] arreglo = new String[getIncognitas()];
                 if(parametros<=3){
+                
                 arreglo = Calculadora.resolver1(matriz, areglo, getIncognitas(),parametros);
+                 
                 for (int i = 0; i < arreglo.length; i++) {
                     jTextArea.append("x" + (i + 1) + "=" + arreglo[i] + "\n");
                 }
