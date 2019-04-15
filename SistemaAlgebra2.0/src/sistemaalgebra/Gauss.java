@@ -369,13 +369,17 @@ public class Gauss extends javax.swing.JFrame {
         jTextArea.setText(" ");
         jTextFieldnNumEcuaciones.setText("");
         jTextFieldnNumIncognitas.setText("");
-        modelo.setRowCount(0);
+      //  modelo.setRowCount(0);
+      /*
         for (int i = 0; i < jTable.getRowCount(); i++) {
             modelo.removeRow(i);
             i -= 1;
         }
+      */
 
-        jTable.setModel(new DefaultTableModel());
+      //  jTable.setModel(new DefaultTableModel());
+      GraficaTest a = new GraficaTest();
+      a.dispose();
 
 
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
