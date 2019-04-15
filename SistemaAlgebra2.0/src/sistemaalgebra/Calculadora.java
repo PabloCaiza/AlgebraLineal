@@ -24,9 +24,9 @@ public class Calculadora {
                 } else {
                     double auxe;
                     double auxe2;
-                    if (i < n) {    
+                    if (i < n) {
                         for (int k = 0; k < matriz[i].length; k++) {
-                            
+
                             auxe = matriz[i][k];
                             matriz[i][k] = matriz[i + 1][k];
                             matriz[i + 1][k] = auxe;
@@ -39,12 +39,10 @@ public class Calculadora {
                             matriz[i][l] = (matriz[i][l] / a);
                         }
 
-                        
                         break;
-                    }
-                    else{
-                       areglo[n-1]=0;
-                       break;
+                    } else {
+                        areglo[n - 1] = 0;
+                        break;
                     }
                 }
 
@@ -63,11 +61,10 @@ public class Calculadora {
                     areglo[j] = areglo[j] - a * areglo[i];
                 }
             }
-            
 
         }
         for (int i = 0; i < areglo.length; i++) {
-            areglo[areglo.length-1]=2.885633;
+            areglo[areglo.length - 1] = 2.885633;
         }
         //ordenar matriz
 
@@ -315,114 +312,144 @@ public class Calculadora {
                 if (matriz[i][i] != 0) {
                     matriz[i][j] = (matriz[i][j] / a);
                 } else {
-                    if (parametros == 1) {
-                        char simbolo1 = '+';
-                        arreglo[inc - 1] = "t";
-                        for (int z = inc - 2; z >= 0; z--) {
-                            double auxiliar = (-1) * matriz[z][inc - 1];
-                            if (matriz[z][inc - 1] >= 0) {
-                                simbolo1 = '-';
-                            } else {
-                                simbolo1 = '+';
-                            }
+//                  
+//                    if (parametros == 1) {
+//                        char simbolo1 = '+';
+//                        arreglo[inc - 1] = "t";
+//                        for (int z = inc - 2; z >= 0; z--) {
+//                            double auxiliar = (-1) * matriz[z][inc - 1];
+//                            if (matriz[z][inc - 1] >= 0) {
+//                                simbolo1 = '-';
+//                            } else {
+//                                simbolo1 = '+';
+//                            }
+//                            arreglo[z] = String.valueOf(String.format("%.3f", areglo[z]));
+//                            if (matriz[z][inc - 1] != 0) {
+//                                arreglo[z] = arreglo[z] + simbolo1 + String.format("%.3f", Math.abs(matriz[z][inc - 1])) + "t";
+//                            }
+//                        }
+//                    }
+
+//                        //
+//                       
+                    char[] simbolo = new char[parametros];
+                    for (int k = 1; k <= parametros; k++) {
+                        arreglo[inc - k] = "t" + k;
+                        for (int z = inc - (parametros + 1); z >= 0; z--) {
+                            
                             arreglo[z] = String.valueOf(String.format("%.3f", areglo[z]));
-                            if (matriz[z][inc - 1] != 0) {
-                                arreglo[z] = arreglo[z] + simbolo1 + String.format("%.3f", Math.abs(matriz[z][inc - 1])) + "t";
-                            }
-                        }
-                    }
-                    if (parametros == 2) {
-                        //
-                        char simbolo1 = '+';
-                        char simbolo2 = '+';
-
-                        for (int k = 1; k < parametros + 1; k++) {
-                            arreglo[inc - k] = "t" + k;
-                            for (int z = inc - (parametros + 1); z >= 0; z--) {
-//                
-                                if (matriz[z][inc - 1] >= 0) {
-                                    simbolo1 = '-';
+                            for (int l =1; l < parametros+1 ; l++) {
+                                
+                         
+                           if (matriz[z][inc -l] >= 0) {
+                                    simbolo[l-1] = '-';
                                 } else {
-                                    simbolo1 = '+';
+                                    simbolo[l-1] = '+';
                                 }
-
-                                if (matriz[z][inc - 2] >= 0) {
-                                    simbolo2 = '-';
-                                } else {
-                                    simbolo2 = '+';
-                                }
-
-                                arreglo[z] = String.valueOf(String.format("%.3f", areglo[z]));
-                                if (matriz[z][inc - 1] != 0) {
-                                    arreglo[z] = arreglo[z] + simbolo1 + String.format("%.3f", Math.abs(matriz[z][inc - 1])) + "t" + 1;
-                                }
-                                if (matriz[z][inc - 2] != 0) {
-                                    arreglo[z] = arreglo[z] + simbolo2 + String.format("%.3f", Math.abs(matriz[z][inc - 2])) + "t" + 2;
-                                }
-
-                            }
-                        }
-
-                    }
-                    if (parametros == 3) {
-                        //
-                        char simbolo1 = '+';
-                        char simbolo2 = '+';
-                        char simbolo3 = '+';
-                        for (int k = 1; k < parametros + 1; k++) {
-                            arreglo[inc - k] = "t" + k;
-                            for (int z = inc - (parametros + 1); z >= 0; z--) {
-                                if (matriz[z][inc - 1] >= 0) {
-                                    simbolo1 = '-';
-                                } else {
-                                    simbolo1 = '+';
-                                }
-                                if (matriz[z][inc - 2] >= 0) {
-                                    simbolo2 = '-';
-                                } else {
-                                    simbolo2 = '+';
-                                }
-                                if (matriz[z][inc - 3] >= 0) {
-                                    simbolo3 = '-';
-                                } else {
-                                    simbolo3 = '+';
-                                }
-
-                                arreglo[z] = String.valueOf(String.format("%.3f", areglo[z]));
-                                if (matriz[z][inc - 1] != 0) {
-                                    arreglo[z] = arreglo[z] + simbolo1 + String.format("%.3f", Math.abs(matriz[z][inc - 1])) + "t" + 1;
-                                }
-                                if (matriz[z][inc - 2] != 0) {
-                                    arreglo[z] = arreglo[z] + simbolo2 + String.format("%.3f", Math.abs(matriz[z][inc - 2])) + "t" + 2;
-                                }
-                                if (matriz[z][inc - 3] != 0) {
-                                    arreglo[z] = arreglo[z] + simbolo3 + String.format("%.3f", Math.abs(matriz[z][inc - 3])) + "t" + 3;
+                          
+                           if (matriz[z][inc - 1] != 0) {
+                                arreglo[z] = arreglo[z] + simbolo[l-1] + String.format("%.3f", Math.abs(matriz[z][inc - l])) + "t" + l;
                                 }
                             }
+                        
+                        
+                        
                         }
 
-                    }
+                        }
 
+//                    if (parametros == 2) {
+////
+//                        char simbolo1 = '+';
+//                        char simbolo2 = '+';
+//                        
+//                        for (int k = 1; k < parametros + 1; k++) {
+//                            arreglo[inc - k] = "t" + k;
+//                            for (int z = inc - (parametros + 1); z >= 0; z--) {
+//                                if (matriz[z][inc - 1] >= 0) {
+//                                    simbolo1 = '-';
+//                                } else {
+//                                    simbolo1 = '+';
+//                                }
+//                                if (matriz[z][inc - 2] >= 0) {
+//                                    simbolo2 = '-';
+//                                } else {
+//                                    simbolo2 = '+';
+//                                }
+//                                
+//
+//                                arreglo[z] = String.valueOf(String.format("%.3f", areglo[z]));
+//                                if (matriz[z][inc - 1] != 0) {
+//                                    arreglo[z] = arreglo[z] + simbolo1 + String.format("%.3f", Math.abs(matriz[z][inc - 1])) + "t" + 1;
+//                                }
+//                                if (matriz[z][inc - 2] != 0) {
+//                                    arreglo[z] = arreglo[z] + simbolo2 + String.format("%.3f", Math.abs(matriz[z][inc - 2])) + "t" + 2;
+//                                }
+//                                
+//                            }
+//                        }
+//
+//                    }
+//                    if (parametros == 3) {
+//
+//                        char simbolo1 = '+';
+//                        char simbolo2 = '+';
+//                        char simbolo3 = '+';
+//                        for (int k = 1; k < parametros + 1; k++) {
+//                            arreglo[inc - k] = "t" + k;
+//                            for (int z = inc - (parametros + 1); z >= 0; z--) {
+//                                if (matriz[z][inc - 1] >= 0) {
+//                                    simbolo1 = '-';
+//                                } else {
+//                                    simbolo1 = '+';
+//                                }
+//                                if (matriz[z][inc - 2] >= 0) {
+//                                    simbolo2 = '-';
+//                                } else {
+//                                    simbolo2 = '+';
+//                                }
+//                                if (matriz[z][inc - 3] >= 0) {
+//                                    simbolo3 = '-';
+//                                } else {
+//                                    simbolo3 = '+';
+//                                }
+//
+//                                arreglo[z] = String.valueOf(String.format("%.3f", areglo[z]));
+//                                if (matriz[z][inc - 1] != 0) {
+//                                    arreglo[z] = arreglo[z] + simbolo1 + String.format("%.3f", Math.abs(matriz[z][inc - 1])) + "t" + 1;
+//                                }
+//                                if (matriz[z][inc - 2] != 0) {
+//                                    arreglo[z] = arreglo[z] + simbolo2 + String.format("%.3f", Math.abs(matriz[z][inc - 2])) + "t" + 2;
+//                                }
+//                                if (matriz[z][inc - 3] != 0) {
+//                                    arreglo[z] = arreglo[z] + simbolo3 + String.format("%.3f", Math.abs(matriz[z][inc - 3])) + "t" + 3;
+//                                }
+//                            }
+//                        }
+//
+//                    }
+                    }
+                }
+
+                if (matriz[i][i] != 0) {
+                    areglo[i] = (areglo[i] / a);
+                }
+
+                //operaciones gauss jordan tranformar los valores abajo y arriba de la diagonal en 0 
+                for (int j = 0; j < n; j++) {
+                    if (i != j) {
+                        a = matriz[j][i];
+                        for (int y = 0; y < n; y++) {
+                            matriz[j][y] = matriz[j][y] - a * matriz[i][y];
+                        }
+                        areglo[j] = areglo[j] - a * areglo[i];
+                    }
                 }
             }
-
-            if (matriz[i][i] != 0) {
-                areglo[i] = (areglo[i] / a);
-            }
-
-            //operaciones gauss jordan tranformar los valores abajo y arriba de la diagonal en 0 
-            for (int j = 0; j < n; j++) {
-                if (i != j) {
-                    a = matriz[j][i];
-                    for (int y = 0; y < n; y++) {
-                        matriz[j][y] = matriz[j][y] - a * matriz[i][y];
-                    }
-                    areglo[j] = areglo[j] - a * areglo[i];
-                }
-            }
+            return arreglo;
         }
-        return arreglo;
-    }
+
+    
 
     public boolean calcularDeterminante(double matriz[][], int inc) {
         boolean bandera = false;
@@ -430,11 +457,11 @@ public class Calculadora {
         double matriz1[][] = new double[2][2];
         for (int i = 0; i < n - 2; i++) {
             double a;
-            
+
             a = matriz[i][i];
             for (int j = 0; j < n; j++) {
-                if(a!=0){
-                matriz[i][j] = (matriz[i][j] / a);
+                if (a != 0) {
+                    matriz[i][j] = (matriz[i][j] / a);
                 }
 
             }

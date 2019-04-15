@@ -277,16 +277,16 @@ public class Gauss extends javax.swing.JFrame {
                 int parametros=m-rangoA-1;
                 JOptionPane.showMessageDialog(null, "Sistema Compatible Indeterminado  con  "+parametros+" parametros");
                 String[] arreglo = new String[getIncognitas()];
-                if(parametros<=3){
+////                if(parametros<=3){
                       
                 arreglo = Calculadora.resolver1(matriz, areglo, getIncognitas(),parametros);
                
                 for (int i = 0; i < arreglo.length; i++) {
                     jTextArea.append("x" + (i + 1) + "=" + arreglo[i] + "\n");
                 }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Solo puede resolver hasta tres parametros");
-                }
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "Solo puede resolver hasta tres parametros");
+//                }
             }
 
         }}else{
@@ -344,16 +344,16 @@ public class Gauss extends javax.swing.JFrame {
                 int parametros=n-rangoA;
                 JOptionPane.showMessageDialog(null, "Sistema Compatible Indeterminado  con  "+parametros+" parametros");
                 String[] arreglo = new String[getIncognitas()];
-                if(parametros<=3){
+////                if(parametros<=3){
                 
                 arreglo = Calculadora.resolver1(matriz, areglo, getIncognitas(),parametros);
                  
                 for (int i = 0; i < arreglo.length; i++) {
                     jTextArea.append("x" + (i + 1) + "=" + arreglo[i] + "\n");
                 }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Solo puede resolver hasta tres parametros");
-                }
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "Solo puede resolver hasta tres parametros");
+//                }
             }
 
         }}else{

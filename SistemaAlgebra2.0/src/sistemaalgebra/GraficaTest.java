@@ -14,67 +14,92 @@ import javax.swing.JTextField;
  *
  * @author saul_
  */
-
 public class GraficaTest extends javax.swing.JFrame {
-String defi = "";
+
+    String defi = "";
+    String [] memoria;
+    double[][] matriz ;
+    double[] areglo;
     /**
      * Creates new form GrafitaTest
      */
     public GraficaTest() {
         initComponents();
         this.setLocationRelativeTo(null);
-       
+
     }
 
-    public GraficaTest(double[][] matriz , double [] areglo) {
+    public GraficaTest(double[][] matriz, double[] areglo) {
         initComponents();
         this.setLocationRelativeTo(null);
-        desde.setText(String.valueOf(-10));
-        hasta.setText(String.valueOf(10));
+        this.matriz = matriz;
+        this.areglo = areglo;
+        desde.setText(String.valueOf(-4));
+        hasta.setText(String.valueOf(4));
         intervalo.setText(String.valueOf(0.1));
-        int cont=0;
+        memoria= new String [areglo.length];
+        int cont = 0;
+        
         for (int i = 0; i < matriz.length; i++) {
             
-//        if(!definicion.getText().equals("")){
-            if(!desde.getText().equals("")){
-                if(!hasta.getText().equals("")){
-                    if(!intervalo.getText().equals("")){
-            try {
-             System.out.println(matriz[i][cont]);  
-             String def;
-             if(areglo[i]<0){
-             def = Double.toString(matriz[i][cont])+"*"+"x"+"+"+Double.toString(matriz[i][cont+1])+"*"+"y"+"+"+Double.toString(areglo[i]);
-             }
-             else{
-             def = Double.toString(matriz[i][cont])+"*"+"x"+"+"+Double.toString(matriz[i][cont+1])+"*"+"y"+"-"+Double.toString(areglo[i]); 
-             }
-            System.out.println(def);
-            double x0 = Double.parseDouble(desde.getText());
-            double xn = Double.parseDouble(hasta.getText());
-            double d = Double.parseDouble(intervalo.getText());
-            
-            Funcion f = new Funcion(def);
-            double[] x = f.rango(x0, xn, d);
-            double[] y = f.eval(x);
-            grafica.crearGrafica(def, x, y);
-        } catch (Exception ex) {
-            Logger.getLogger(GraficaTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                    }else{
+            double auxiliar = matriz[i][1];
+            char simbolo1;
+            char simbolo2;
+
+//        
+            if (!desde.getText().equals("")) {
+                if (!hasta.getText().equals("")) {
+                    if (!intervalo.getText().equals("")) {
+                        try {
+                           
+                            System.out.println(matriz[i][cont]);
+                            String def;
+                            if (areglo[i] / auxiliar >= 0) {
+                                simbolo2 = '+';
+
+                            } else {
+                                simbolo2 = '-';
+
+                            }
+                            if (((-1)*matriz[i][cont]) / auxiliar >= 0) {
+                                simbolo1 = '+';
+
+                            } else {
+                                simbolo1 = '-';
+
+                            }
+                            if(simbolo1<0){
+                            def = simbolo1 + Double.toString(Math.abs((matriz[i][cont] / auxiliar))) + "*" + "x" + simbolo2 + Double.toString(Math.abs((areglo[i] / auxiliar)));
+                            } else{
+                                def = Double.toString(Math.abs((matriz[i][cont] / auxiliar))) + "*" + "x" + simbolo2 + Double.toString(Math.abs((areglo[i] / auxiliar)));
+                            }
+                            
+                            memoria[i]=def;
+                            System.out.println(def);
+                            double x0 = Double.parseDouble(desde.getText());
+                            double xn = Double.parseDouble(hasta.getText());
+                            double d = Double.parseDouble(intervalo.getText());
+
+                            Funcion f = new Funcion(def);
+                            double[] x = f.rango(x0, xn, d);
+                            double[] y = f.eval(x);
+                            grafica.crearGrafica(def, x, y);
+                            
+                        } catch (Exception ex) {
+                            Logger.getLogger(GraficaTest.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
                         JOptionPane.showMessageDialog(null, "Ingrese el intervalo");
                     }
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Ingrese un rango en xn");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Ingrese un rango en x0");
             }
-//        }else{
-//            JOptionPane.showMessageDialog(null, "Ingrese la función");
-//        } 
+//      
+        }
     }
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,21 +110,15 @@ String defi = "";
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        definicion = new javax.swing.JTextField();
         desde = new javax.swing.JTextField();
         hasta = new javax.swing.JTextField();
         intervalo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         panel = grafica.obtieneGrafica();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Función");
 
         jLabel2.setText("x0");
 
@@ -107,29 +126,15 @@ String defi = "";
 
         jLabel4.setText("Intervalo");
 
-        definicion.addActionListener(new java.awt.event.ActionListener() {
+        desde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                definicionActionPerformed(evt);
+                desdeActionPerformed(evt);
             }
         });
 
         hasta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hastaActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Graficar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Agregar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -141,7 +146,7 @@ String defi = "";
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
+            .addGap(0, 469, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,133 +154,55 @@ String defi = "";
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(definicion, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(intervalo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                                .addComponent(hasta, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(desde, javax.swing.GroupLayout.Alignment.LEADING))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(intervalo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(hasta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(desde, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(definicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(desde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(hasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(intervalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(28, 28, 28))
+                .addGap(64, 64, 64))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         if(!definicion.getText().equals("")){
-            if(!desde.getText().equals("")){
-                if(!hasta.getText().equals("")){
-                    if(!intervalo.getText().equals("")){
-            try {
-            String def = definicion.getText();
-            double x0 = Double.parseDouble(desde.getText());
-            double xn = Double.parseDouble(hasta.getText());
-            double d = Double.parseDouble(intervalo.getText());
-            
-            Funcion f = new Funcion(def);
-            double[] x = f.rango(x0, xn, d);
-            double[] y = f.eval(x);
-            grafica.crearGrafica(def, x, y);
-        } catch (Exception ex) {
-            Logger.getLogger(GraficaTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Ingrese el intervalo");
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Ingrese un rango en xn");
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese un rango en x0");
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Ingrese la función");
-        } 
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        if(!definicion.getText().equals("")){
-            if(!desde.getText().equals("")){
-                if(!hasta.getText().equals("")){
-                    if(!intervalo.getText().equals("")){
-            try {
-            String def = defi;
-            double x0 = Double.parseDouble(desde.getText());
-            double xn = Double.parseDouble(hasta.getText());
-            double d = Double.parseDouble(intervalo.getText());
-            
-            Funcion f = new Funcion(def);
-            double[] x = f.rango(x0, xn, d);
-            double[] y = f.eval(x);
-            grafica.crearGrafica(def, x, y);
-        } catch (Exception ex) {
-            Logger.getLogger(GraficaTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Ingrese el intervalo");
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Ingrese un rango en xn");
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese un rango en x0");
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Ingrese la función");
-        } 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void definicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_definicionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_definicionActionPerformed
-
     private void hastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hastaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hastaActionPerformed
 
+    private void desdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desdeActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -313,21 +240,16 @@ String defi = "";
             }
         });
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField definicion;
     private javax.swing.JTextField desde;
     private javax.swing.JTextField hasta;
     private javax.swing.JTextField intervalo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
-Grafica grafica = new Grafica("Grafico","x","y");
+Grafica grafica = new Grafica("Grafico", "x", "y");
 }
